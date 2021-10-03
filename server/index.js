@@ -22,7 +22,7 @@ app.use(cors())
 //app.use(cors({ credentials: true, origin: '' }))
 app.use(cookieparser())
 
-
-
+import routerMemories from './routers/memories.js'
+app.use('/memories', routerMemories)
 
 app.listen(process.env.PORT || 5000, () => console.log(`Server ${process.env.PORT} Portunda Calisiyor..`))
