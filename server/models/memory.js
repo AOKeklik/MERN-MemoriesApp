@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 
 const MemorySchema = new mongoose.Schema({
-    //createrId: {type: String, require: true},
-    title: {type: String, require: true},
-    content: {type: String, require: true},
+    //createrId: {type: String, required: true},
+    title: {type: String, required: true},
+    content: {type: String, required: true},
     image: {type: String},
+    creator: {type: String, required: true},
     createdAt: {type: Date, default: new Date()},
 }, 
 { timestamps: true })
