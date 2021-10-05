@@ -41,7 +41,6 @@ export const updateOne = async (req, res, next) => {
 
         const {title, content, image, creator} = req.body
         const updateData = await Memory.findByIdAndUpdate(id, {_id: id, title, content, image, creator}, {new: true})
-        if (!updateData) return
         res.status(200).json(updateData)
     } catch (err) {
         res.status(404).json({message: err.message})
