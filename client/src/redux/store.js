@@ -4,7 +4,7 @@ import reducerMemories from './reducers/reducerMemories'
 import reducerAuth from './reducers/reducerAuth'
 
 const initial_state = {
-    memories: [1,2,3, 'React and Redux are work!!'],
+    memories: [],
     auth: {}
 }
 
