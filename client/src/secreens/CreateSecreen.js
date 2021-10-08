@@ -1,9 +1,8 @@
 import React from 'react'
+import SubmitMemory from '../component/SubmitMemory'
 
 function CreateSecreen() {
-    return <>
-        <h1>Create Screen</h1>
-    </>
+    return <SubmitMemory />
 }
 
 export default CreateSecreen

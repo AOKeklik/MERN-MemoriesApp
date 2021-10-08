@@ -12,12 +12,14 @@ import Footer from './component/Footer'
 function App() {
     return <BrowserRouter>
         <Header />
-        <Switch>
-            <Route exact path='/' component={HomeScreen} />
-            <Route path='/create' component={CreateScreen} />
-            <Route path='/update/:id' component={UpdateScreen} />
-            <Route path='/auth' component={AuthScreen} />
-        </Switch>
+            <div className="container">
+                <Switch>
+                    <Route exact path='/' component={HomeScreen} />
+                    <Route path='/create' component={CreateScreen} />
+                    <Route path='/update/:id' component={UpdateScreen} />
+                    <Route path='/auth' component={AuthScreen} />
+                </Switch>
+            </div>
         <Footer />
     </BrowserRouter>
 }
