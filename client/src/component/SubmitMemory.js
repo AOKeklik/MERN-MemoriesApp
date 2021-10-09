@@ -5,20 +5,24 @@ import {useHistory} from 'react-router-dom'
 
 function SubmitMemory() {
     const History = useHistory()
-    const [inputs, setInputs] = useState({title: '', creator: '', content: '', image: ''})
 
-    console.log(inputs)
+    const [inputs, setInputs] = useState({title: '', creator: '', content: '', image: ''})
+    const handlerOnChange = (e) => setInputs({...inputs, [e.target.name]: e.target.value})
+
+    const handlerInSubmit = (e) => {
+        e.preventDefault()
+        History.push('/')
+
+    }
+
+
     return <div className="row">
         <div className="col-lg-6 offset-lg-3">
-        <form onSubmit={(e) => {
-            e.preventDefault()
-
-            History.push('/')
-        }}>
+        <form onSubmit={handlerInSubmit}>
         <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
             <input
-                onChange={(n) => setInputs({...inputs, title: n.target.value})}
+                onChange={handlerOnChange}
                 value={inputs.title}
                 name="title"
                 id="title"
@@ -30,7 +34,7 @@ function SubmitMemory() {
         <div className="mb-3">
             <label htmlFor="creator" className="form-label">Creator</label>
             <input 
-                onChange={(n) => setInputs({...inputs, creator: n.target.value})}
+                onChange={handlerOnChange}
                 value={inputs.creator}
                 name="creator"
                 id="creator"
@@ -42,7 +46,7 @@ function SubmitMemory() {
         <div className="mb-3">
             <label htmlFor="content" className="form-label">Content</label>
             <textarea
-                onChange={(n) => setInputs({...inputs, content: n.target.value})}
+                onChange={handlerOnChange}
                 value={inputs.content}
                 name="content"
                 id="content"
