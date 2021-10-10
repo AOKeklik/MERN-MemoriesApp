@@ -7,6 +7,7 @@ import HomeScreen from './secreens/HomeScreen'
 import CreateScreen from './secreens/CreateSecreen'
 import UpdateScreen from './secreens/UpdateScreen'
 import AuthScreen from './secreens/AuthScreen'
+import NotFound from './secreens/NotFound'
 import Footer from './component/Footer'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <Route path='/create' component={CreateScreen} />
                     <Route path='/update/:id' component={UpdateScreen} />
                     <Route path='/auth' component={AuthScreen} />
+                    <Route component={NotFound} />
                 </Switch>
             </div>
         <Footer />
