@@ -8,6 +8,7 @@ import {deleteMemory} from '../axios/index'
 function Memory({data}) {
 
     const handlerDelete = async (id) => {
+            if (!window.confirm('Are you sure you want to delete the Memory?')) return
             const deleteItem = await deleteMemory(id)
             alert(deleteItem.data.message)
     }

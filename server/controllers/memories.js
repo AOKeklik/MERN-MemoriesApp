@@ -27,7 +27,7 @@ export const createOne = async (req, res, next) => {
     try {
         const formData = req.body
         const newData = await Memory.create(formData)
-        res.status(201).json(newData)
+        res.status(201).json({newData, message: 'New Data has been created.'})
     } catch (err) {
         res.json({ message: err.message })
     }
@@ -41,7 +41,7 @@ export const updateOne = async (req, res, next) => {
 
         const {title, content, image, creator} = req.body
         const updateData = await Memory.findByIdAndUpdate(id, {_id: id, title, content, image, creator}, {new: true})
-        res.status(200).json(updateData)
+        res.status(200).json({updateData, message: 'The Data has been updated.'})
     } catch (err) {
         res.status(404).json({message: err.message})
     }

@@ -11,13 +11,13 @@ export const fetchMemory = async (id) => {
 }
 
 export const createMemory = async (newMemory) => {
-    await api.post(`/memories`, newMemory)
+    return await api.post(`/memories`, newMemory)
 }
 
 export const updateMemory = async (id, newMemory) => {
-    await api.put(`/memories/${id}`, newMemory)
+    return await api.put(`/memories/${id}`, newMemory)
 }
 
 export const deleteMemory = async (id) => {
-    await api.delete(`/memories/${id}`)
+    return await api.delete(`/memories/${id}`)
 }
