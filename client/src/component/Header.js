@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Header() {
-    return <nav className="navbar navbar-dark navbar-expand-lg bg-dark fs-5 py-lg-2 mb-5">
+    return <nav id="top" className="navbar navbar-dark navbar-expand-lg bg-dark fs-5 py-lg-2 mb-5">
         <div className="container">
             <Link to='/'><div className="navbar-brand fs-3">Ani Kutusu</div></Link>
             <button 

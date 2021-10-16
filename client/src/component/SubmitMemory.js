@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
-
 import ReactFileBase64 from 'react-file-base64'
+
 import {useHistory} from 'react-router-dom'
-import {createMemory} from '../axios/index'
+//import {createMemory} from '../axios/index'
+import {actionCreateMemory} from '../redux/actions/actionMemories'
+import {useDispatch} from 'react-redux'
 
 function SubmitMemory() {
     const History = useHistory()
+    const Dispatch = useDispatch()
 
     const [inputs, setInputs] = useState({title: '', creator: '', content: '', image: ''})
     const handlerOnChange = (e) => setInputs({...inputs, [e.target.name]: e.target.value})
 
-    const handlerOnSubmit = async (e) => {
+    /* const handlerOnSubmit = async (e) => {
         e.preventDefault()
         const createItem = await createMemory(inputs)
         alert(createItem.data.message)
+        History.push('/')
+    } */
+
+    const handlerOnSubmit = (e) => {
+        e.preventDefault()
+        Dispatch(actionCreateMemory(inputs))
         History.push('/')
     }
 

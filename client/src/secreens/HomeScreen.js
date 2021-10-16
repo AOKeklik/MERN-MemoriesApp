@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from 'react'
-
 import Memory from '../component/Memory'
-import {fetchMemories} from '../axios/index'
+
+//import {fetchMemories} from '../axios/index'
+import {useSelector, useDispatch} from 'react-redux'
+import {actionFetchMemories} from '../redux/actions/actionMemories'
 
 function HomeScreen() {
-    const [memories, setMemory] = useState([])
+    const Dispatch = useDispatch()
 
-    useEffect(() => {
+    const State = useSelector(state => state.memories)
+    const [memories, setMemories] = useState([])
+
+
+    /* useEffect(() => {
         (async function () {
             const {data} = await fetchMemories()
-            setMemory(data)
+            setMemories(data)
         })()
-    }, [])
+    }, []) */
+
+    //console.log(State)
+
+    useEffect(() => {
+        if (!State.memories[0]) Dispatch(actionFetchMemories())
+        setMemories(State.memories)
+    }, [Dispatch, State])
 
     return <>
         <h1>Actual Memories</h1>
 
         <div className="row">
         {
+            
+                State.message.length ? (
+                    <div className="alert alert-info" role="alert">{State.message}</div>
+                ) : (
+                    null
+                )
+        }
+        {   
             !memories.length ? (
                 <div className="d-flex justify-content-center align-items-center" style={{height: '50vh'}}>
                     <div className="spinner-grow">

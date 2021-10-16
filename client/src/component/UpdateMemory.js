@@ -1,17 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { /* useEffect, */ useState } from 'react'
 import ReactFileBase64 from 'react-file-base64'
 
 import {useParams, useHistory} from 'react-router-dom'
-import {fetchMemories, updateMemory} from '../axios/index'
+//import {fetchMemories, updateMemory} from '../axios/index'
+import {useDispatch, useSelector} from 'react-redux'
+import {actionUpdateMemory} from '../redux/actions/actionMemories'
 
 function UpdateMemory() {
     const {id : Params} = useParams()
+    const Dispatch = useDispatch()
     const History = useHistory()
+    const {memories} = useSelector(state => state.memories)
+    const memory = memories.find(n => n._id === Params)
+
+    //console.log(memory)
     
-    const [inputs, setInputs] = useState({title: '', creator: '', content: '', image: ''})
+    const [inputs, setInputs] = useState({
+        title: memory ? memory.title : '', 
+        creator: memory ? memory.creator : '',
+        content: memory ? memory.content : '',
+        image: memory ? memory.image : '',
+    })
     const handlerOnChange = (e) => setInputs({...inputs, [e.target.name]: e.target.value})
 
-    useEffect(() => {
+    /* useEffect(() => {
         (async function () {
             const {data} = await fetchMemories()
             
@@ -21,14 +33,19 @@ function UpdateMemory() {
             const findData = data.find(n => n._id === Params)
             setInputs(findData)
         })()
-    }, [Params, History])
+    }, [Params, History]) */
 
-    const handlerOnSubmit = async (e) => {
+    const handlerOnSubmit = /* async */ (e) => {
         e.preventDefault()
-        const updateItem = await updateMemory(Params, inputs)
-        alert(updateItem.data.message)
+        //const updateItem = await updateMemory(Params, inputs)
+        //alert(updateItem.data.message)
+        Dispatch(actionUpdateMemory(Params, inputs))
         History.push('/')
     }
+
+    //console.log(memories[0])
+    //console.log(inputs)
+    //console.log(History)
 
     return <div className="row">
         <div className="col-lg-6 offset-lg-3">

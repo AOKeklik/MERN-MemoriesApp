@@ -9,37 +9,37 @@ function Footer() {
         <IconContext.Provider value={{ size: "1rem", color: "white"}}>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaFacebook /></a>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaTwitter /></a>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaGoogle /></a>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaInstagram /></a>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaLinkedin /></a>
           <a
             className="btn btn-link btn-floating btn-lg text-dark m-lg-1"
-            href="#!"
+            href="#top"
             role="button"
             data-mdb-ripple-color="dark"
             ><FaGithub /></a>
@@ -48,7 +48,7 @@ function Footer() {
     </div>
     <div className="text-center text-white pb-4" >
       © 2021 Copyright
-      <a href="#" className="text-danger text-decoration-none"> Ani Kutusu</a>
+      <a href="#top" className="text-danger text-decoration-none"> Ani Kutusu</a>
     </div>
   </footer>
 }

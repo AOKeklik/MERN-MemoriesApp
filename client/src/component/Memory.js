@@ -3,14 +3,18 @@ import {Link} from 'react-router-dom'
 import {FaEdit, FaTrashAlt} from 'react-icons/fa'
 //import moment from 'moment'
 
-import {deleteMemory} from '../axios/index'
+//import {deleteMemory} from '../axios/index'
+import {useDispatch} from 'react-redux'
+import {actionDeleteMemory} from '../redux/actions/actionMemories'
 
 function Memory({data}) {
+    const Dispatch = useDispatch()
 
-    const handlerDelete = async (id) => {
+    const handlerDelete = /* async */ (id) => {
             if (!window.confirm('Are you sure you want to delete the Memory?')) return
-            const deleteItem = await deleteMemory(id)
-            alert(deleteItem.data.message)
+            //const deleteItem = await deleteMemory(id)
+            //alert(deleteItem.data.message)
+            Dispatch(actionDeleteMemory(id))
     }
 
     const fromNow = (date) => {

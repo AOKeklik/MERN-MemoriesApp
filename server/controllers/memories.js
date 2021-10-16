@@ -54,7 +54,6 @@ export const deleteOne = async (req, res, next) => {
             res.status(200).json({message: 'Memory Id Is Not Valid!'})
 
         await Memory.findByIdAndDelete(id)
-        
         res.status(200).json({message: 'Memory Has Been Deleted'})
     } catch (err) {
         res.status(404).json({message: err.message})

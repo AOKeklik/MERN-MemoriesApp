@@ -4,11 +4,14 @@ import reducerMemories from './reducers/reducerMemories'
 import reducerAuth from './reducers/reducerAuth'
 
 const initial_state = {
-    memories: [],
+    memories: {
+        message: '',
+        memories: [],
+    },
     auth: {}
 }
 
-const composeEnhancer = window.__REDUX__DEVTOOLS__EXTENSION__COMPOSE || compose
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
     combineReducers({
         memories: reducerMemories,
