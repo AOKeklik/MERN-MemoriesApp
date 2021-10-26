@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import Message from '../component/Message'
+import {FcGoogle} from 'react-icons/fc'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {actionSignup, actionSignin} from '../redux/actions/actionAuth'
+import {GoogleLogin} from 'react-google-login'
+import { AUTH } from '../redux/constants/actionConstants'
 
 function AuthScreen({history}) {
-    const Dispatch = useDispatch()
+    const dispatch = useDispatch()
     const {user: auth} = useSelector(state => state)
     const initialState = {firstname: '', lastname: '', email: '', password: '', confirmpassword: ''}
 
@@ -23,11 +26,31 @@ function AuthScreen({history}) {
 
         if (login) {
             //Signin
-            Dispatch(actionSignin(inputs, history))
+            dispatch(actionSignin(inputs, history))
         } else {
             //signup
-            Dispatch(actionSignup(inputs, history))
+            dispatch(actionSignup(inputs, history))
         }
+    }
+
+    const googleSuccess = (res) => {
+        const {googleId: _id, name, email} = res?.profileObj
+        const accesstoken = res?.tokenId
+        const google = true
+        
+        try {
+            dispatch({
+                type: AUTH,
+                payload: {user: {_id, name, email, accesstoken, google}, message: 'Google Signup!'}
+            })
+            history.push('/')
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const googleFailure = (err) => {
+
     }
 
     console.log(auth)
@@ -65,6 +88,25 @@ function AuthScreen({history}) {
                     </div>
                     <div className="mb-4">
                         <input type="submit" value="signin" className="btn btn-dark w-100" />
+                    </div>
+                    <div className="mb-4">
+                        <GoogleLogin
+                            clientId="337723087603-e033e5lfhj3df860gh19pm9cgrr35ign.apps.googleusercontent.com"
+                            onSuccess={googleSuccess}
+                            onFailure={googleFailure}
+                            cookiePolicy={'single_host_origin'}
+                            //isSignedIn="true"
+                            render={renderProps => (
+                                <button
+                                    onClick={renderProps.onClick} 
+                                    disabled={renderProps.disabled}
+                                    className="btn btn-info w-100"                                    
+                                >
+                                    <FcGoogle size="22" />
+                                    <span className="ps-2">Signin with Google</span>
+                                </button>
+                            )}
+                        />
                     </div>
                     <div className="form-text mb-3">
                         <p className="d-inline-block me-3">Do not you have an account yet?</p>

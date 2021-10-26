@@ -4,15 +4,18 @@ const auth = (req, res, next) => {
     try {
         const accesstoken = req.headers.authorization?.split(' ')[1]
         
+        const googleExists = accesstoken.length > 500
         let verifiedAccesstoken
 
-        if (accesstoken) {
+        if (accesstoken && !googleExists) {
             verifiedAccesstoken = jwt.verify(
                 accesstoken,
                 process.env.ACCESS_TOKEN_SECRET
             )
-
             req.createrId = verifiedAccesstoken.id
+        } else {
+            verifiedAccesstoken = jwt.decode(accesstoken)
+            req.createrId = verifiedAccesstoken.sub
         }
     
 

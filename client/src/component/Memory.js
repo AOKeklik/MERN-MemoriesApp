@@ -71,7 +71,7 @@ function Memory({data}) {
         setUser(storageUser)
     }, [auth])
 
-    console.log(user)
+    //console.log(user)
 
     return <div className="col-lg-4 p-4">
         <div className="card" style={{width: ""}}>

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import jwtdecode from 'jwt-decode'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { actionLogout,actionRefreshAccesstoken } from '../redux/actions/actionAuth'
 
 function Header() {
     const location = useLocation()
     const history = useHistory()
     const dispatch = useDispatch()
+    const auth = useSelector(state => state?.user)
 
     const [user, setUser] = useState()
 
@@ -19,8 +20,11 @@ function Header() {
     }
 
     const renewAccesstoken = async (id) => {
-        await dispatch(actionRefreshAccesstoken(id))
-        setUser(JSON.parse(localStorage.getItem('user')))
+        const google = auth?.userData?.google
+        if (!google) {
+            await dispatch(actionRefreshAccesstoken(id))
+            setUser(JSON.parse(localStorage.getItem('user')))
+        }
     }
 
     useEffect(() => {
@@ -43,7 +47,7 @@ function Header() {
     }, [location, user])
 
 
-    //console.log(user)
+    console.log(auth)
     return <nav id="top" className="navbar navbar-dark navbar-expand-lg bg-dark fs-5 py-lg-2 mb-5">
         <div className="container">
             <Link to='/'><div className="navbar-brand fs-3">Ani Kutusu</div></Link>

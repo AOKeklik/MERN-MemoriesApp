@@ -21,8 +21,8 @@ function HomeScreen() {
         })()
     }, []) */
 
-    console.log(StateMemories)
-    console.log(StateAuth)
+    // console.log(StateMemories)
+    // console.log(StateAuth)
 
     useEffect(() => {
         if (!StateMemories.memories[0]) Dispatch(actionFetchMemories())
