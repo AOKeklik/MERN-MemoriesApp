@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Memory from '../component/Memory'
+import Message from '../component/Message'
 
 //import {fetchMemories} from '../axios/index'
 import {useSelector, useDispatch} from 'react-redux'
@@ -8,7 +9,8 @@ import {actionFetchMemories} from '../redux/actions/actionMemories'
 function HomeScreen() {
     const Dispatch = useDispatch()
 
-    const State = useSelector(state => state.memories)
+    const StateMemories = useSelector(state => state.memories)
+    const StateAuth = useSelector(state => state.user.error)
     const [memories, setMemories] = useState([])
 
 
@@ -19,12 +21,13 @@ function HomeScreen() {
         })()
     }, []) */
 
-    //console.log(State)
+    console.log(StateMemories)
+    console.log(StateAuth)
 
     useEffect(() => {
-        if (!State.memories[0]) Dispatch(actionFetchMemories())
-        setMemories(State.memories)
-    }, [Dispatch, State])
+        if (!StateMemories.memories[0]) Dispatch(actionFetchMemories())
+        setMemories(StateMemories.memories)
+    }, [Dispatch, StateMemories])
 
     return <>
         <h1>Actual Memories</h1>
@@ -32,9 +35,9 @@ function HomeScreen() {
         <div className="row">
         {
             
-                State.message.length ? (
-                    <div className="alert alert-info" role="alert">{State.message}</div>
-                ) : (
+                StateMemories.error ? ( <>
+                    <Message variant={StateMemories.error.variant} >{StateMemories.error.message}</Message>
+                </>) : (
                     null
                 )
         }

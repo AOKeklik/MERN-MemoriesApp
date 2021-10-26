@@ -1,7 +1,7 @@
-import {FETCH_ALL,CREATE,UPDATE,DELETE} from '../constants/actionConstants'
+import {FETCH_ALL,CREATE,UPDATE,DELETE, DELETE_FAIL, CREATE_FAIL} from '../constants/actionConstants'
 import {fetchMemories,createMemory,updateMemory,deleteMemory} from '../../axios/index'
 
-export const actionFetchMemories = () => async (dispatch) => {
+export const actionFetchMemories = () => async (dispatch, getState) => {
     try {
         const {data} = await fetchMemories()
         dispatch({
@@ -21,7 +21,12 @@ export const actionCreateMemory = (newMemory) => async (dispatch) => {
                 payload: data
             })
         } catch (err) {
-            console.log(err)
+            dispatch({
+                type: CREATE_FAIL,
+                payload: err.response && err.response.data.message
+                    ? err.response.data.message
+                    : err.message
+            })
         }
 }
 
@@ -33,7 +38,12 @@ export const actionUpdateMemory = (id, newMemory) => async (dispatch) => {
             payload: data
         })
     } catch (err) {
-        console.log(err)
+        dispatch({
+            type: DELETE_FAIL,
+            payload: err.response && err.response.data.message
+                ? err.response.data.message
+                : err.message
+        })
     }
 }
 
@@ -45,6 +55,11 @@ export const actionDeleteMemory = (id) => async (dispatch) => {
             payload: {id, message: data.message}
         })
     } catch (err) {
-        console.log(err)
+        dispatch({
+            type: DELETE_FAIL,
+            payload: err.response && err.response.data.message
+                ? err.response.data.message
+                : err.message
+        })
     }
 }

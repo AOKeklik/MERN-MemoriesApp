@@ -18,11 +18,18 @@ const app = express()
 app.use(express.json({ limit: '20mb' }))
 app.use(express.urlencoded({ extended: true }))
 
-app.use(cors())
-//app.use(cors({ credentials: true, origin: '' }))
+/* cookie */
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(cookieparser())
 
+/* middleware */
+import posttrimmer from './middleware/posttrimmer.js'
+app.use(posttrimmer)
+
+/* routers */
 import routerMemories from './routers/memories.js'
+import routerUser from './routers/users.js'
 app.use('/memories', routerMemories)
+app.use('/user', routerUser)
 
 app.listen(process.env.PORT || 5000, () => console.log(`Server ${process.env.PORT} Portunda Calisiyor..`))

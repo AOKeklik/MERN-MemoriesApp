@@ -10,6 +10,7 @@ function UpdateMemory() {
     const {id : Params} = useParams()
     const Dispatch = useDispatch()
     const History = useHistory()
+
     const {memories} = useSelector(state => state.memories)
     const memory = memories.find(n => n._id === Params)
 

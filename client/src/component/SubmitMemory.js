@@ -13,6 +13,8 @@ function SubmitMemory() {
     const [inputs, setInputs] = useState({title: '', creator: '', content: '', image: ''})
     const handlerOnChange = (e) => setInputs({...inputs, [e.target.name]: e.target.value})
 
+    
+
     /* const handlerOnSubmit = async (e) => {
         e.preventDefault()
         const createItem = await createMemory(inputs)
